@@ -1,0 +1,10 @@
+# Generated Data Files
+*.all
+*.json
+*.txt
+!requirements.txt
+!urls.txt
+
+# Python Cache
+__pycache__/
+*.pyc

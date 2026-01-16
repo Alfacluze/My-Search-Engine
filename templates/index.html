@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Search Engine</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+        h1 { text-align: center; color: #444; }
+        .search-box { background: #f8f9fa; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input[type="text"] { width: 70%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 12px 25px; background: #007bff; color: white; border: none; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result-container { margin-top: 30px; }
+        .result { margin-bottom: 25px; }
+        .result-title a { font-size: 20px; color: #1a0dab; text-decoration: none; font-weight: normal; }
+        .result-title a:hover { text-decoration: underline; }
+        .result-url { color: #006621; font-size: 14px; margin-bottom: 3px; }
+        .result-stats { font-size: 13px; color: #70757a; }
+    </style>
+</head>
+<body>
+
+    <h1>Alfa Web Search</h1>
+
+    <div class="search-box">
+        <form method="POST">
+            <input type="text" name="query" placeholder="Enter to Search" value="{{ query }}" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="result-container">
+        {% if query %}
+            <p><i>Showing top results for: <b>{{ query }}</b></i></p>
+            <hr>
+        {% endif %}
+
+        {% for res in results %}
+            <div class="result">
+                <div class="result-title">
+                    <a href="{{ res.url }}" target="_blank">{{ res.title }}</a>
+                </div>
+                <div class="result-url">{{ res.url }}</div>
+                <div class="result-stats">
+                    <b>Combined Score: {{ res.score }}</b> 
+                </div>
+            </div>
+        {% else %}
+            {% if query %}
+                <p>No matches found.</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
